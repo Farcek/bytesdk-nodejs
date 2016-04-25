@@ -4,6 +4,7 @@ byte system sdk in nodejs
 
 ##use application service
 
+```javascript
 var AppSdk = require('byte-sdk');
 var keys = require('./keys...');
 
@@ -21,3 +22,4 @@ app.getJAT(function (err, jat) {
         done();
     });
     
+```
