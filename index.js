@@ -40,10 +40,12 @@ function AppSdk(options) {
             method: 'POST',
             json: {jct: self.genJCT()}
         }, function (err, httpResponse, body) {
-            if (err) {
-                return callback(err);
+            console.log('httpResponse.statusCode', httpResponse.statusCode)
+            if (!err && httpResponse.statusCode == 200) {
+                callback(false, body);
+            } else {
+                return callback(err || true);
             }
-            callback(false, body);
         });
     };
 }
