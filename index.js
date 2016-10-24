@@ -29,23 +29,30 @@ function AppSdk(options) {
     var uri = options.uri || 'http://app.byte.mn/last';
 
     self.genJCT = function () {
-        return jwt.sign({name: 'jct', app: app}, {
+        return jwt.sign({ name: 'jct', app: app }, {
             key: keyPrivate, passphrase: passphrase
-        }, {algorithm: 'RS256'});
+        }, { algorithm: 'RS256' });
     };
 
     self.getJAT = function (callback) {
         request({
             url: uri + "/" + app,
             method: 'POST',
-            json: {jct: self.genJCT()}
+            json: { jct: self.genJCT() }
         }, function (err, httpResponse, body) {
-            console.log('httpResponse.statusCode', httpResponse.statusCode)
-            if (!err && httpResponse.statusCode == 200) {
-                callback(false, body);
-            } else {
-                return callback(err || true);
+            console.log('byteSDK getJAT - httpResponse.statusCode >>', httpResponse.statusCode)
+            if (err) {
+                return callback(err);
             }
+            if (httpResponse.statusCode == 200) {
+                return callback(false, body);
+            }
+
+            callback({
+                err: true,
+                resp: httpResponse,
+                body: body
+            });
         });
     };
 }
