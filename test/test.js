@@ -1,47 +1,67 @@
-var AppSdk = require('../index');
+var AppSdk = require('../lib/sdk.js');
 var keys = require('./keys/keys');
 
-var app = new AppSdk({
-    id: 9,
-    keyPrivate: keys.private,
-    keyPublic: keys.key,
-    passphrase: keys.passphrase,
-    uri: 'http://app.test.byte.mn/v1'
-});
+var option = {
+    appId: 9,
+    key: {
+        private: keys.private,
+        public: keys.key,
+        passphrase: keys.passphrase,
+    },
 
-function appService(done){
-    console.log('app service ---------------------------------------');
-    console.log("jct=", app.genJCT());
-    app.getJAT(function (err, jat) {
-        console.log("jat=", jat);
-        done();
-    });
+    appBaseUri: 'http://app.test.byte.mn/v1',
+    userBaseUri: 'http://userly.test.byte.mn/v1'
+};
+
+var sdk = new AppSdk.ByteSdk(option);
+
+sdk.getJAT();
+
+
+function test(name, action) {
+    console.log('test ', name);
+
+    action
+        .then(function(r) { console.log('    success->', r); })
+        .catch(function(r) { console.log('    error->', r); });
 }
 
-function userService(done){
-    console.log('user service ---------------------------------------');
+//test("getJAT", sdk.getJAT());
+var at = "EAANdc3yG4kUBADXH6wlhSZACltsCWyiSxPLZB1DmDtzIRSihHxzaigPCZBrK1DKChMeL6CpgLfrTshc6ZAKM9iZCWnEzM1tCDWEHZB4uKE3XnpOhEXdeDiranfzlIxrZBlKOZC7vLS7CWUqtzJ5HHxVrfycZAsBmlgxHE5Sfo3ZAtWAzQY7Oo1KlqretSbJnYmKEcZD";
+test("userLoginFb", sdk.userLoginFb(at));
 
-    var UserSdk = require('../user service');
+// function appService(done) {
+//     console.log('app service ---------------------------------------');
+//     console.log("jct=", app.genJCT());
+//     app.getJAT(function(err, jat) {
+//         console.log("jat=", jat);
+//         done();
+//     });
+// }
 
-    var user = new UserSdk({
-        app : app,
-        uri: 'http://userly.test.byte.mn/v1'
-    });
+// function userService(done) {
+//     console.log('user service ---------------------------------------');
+
+//     var UserSdk = require('../user service');
+
+//     var user = new UserSdk({
+//         app: app,
+//         uri: 'http://userly.test.byte.mn/v1'
+//     });
 
 
-    var at = "EAAPQtAy046cBADXsemtjKbv9XWJ0XURYJM5DbmI4IUpzs3nJRiwWpsNtaf9zvZBg93X1ClBkb3FRqYnzVMs0VIE1D0ZAT4nrzboUlIbQAtudoPmHBmTDNkia02TxDbpKPU6P84bHps2F7mZCOlIlYTSOt6rAt8ZD";
 
-    user.loginFb(at,function (err, userinfo) {
-        console.log("loginFb",err);
-        console.log("loginFb",userinfo);
-        done();
-    });
-}
 
-appService(function () {
-    console.log('--- done userService')
-    userService(function () {
-        
-    });
-})
+//     user.loginFb(at, function(err, userinfo) {
+//         console.log("loginFb", err);
+//         console.log("loginFb", userinfo);
+//         done();
+//     });
+// }
 
+// appService(function() {
+//     console.log('--- done userService');
+//     userService(function() {
+
+//     });
+// });
