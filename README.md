@@ -6,20 +6,22 @@ byte system sdk in nodejs
 
 ```javascript
 
-    var AppSdk = require('byte-sdk');
+    var byteSdk = require('byte-sdk');
     var keys = require('./keys...');
     
-    var app = new AppSdk({
-        id: 9, // application id
-        keyPrivate: keys.private, 
-        keyPublic: keys.key,
-        passphrase: keys.passphrase,
-        uri: 'http://app.test.byte.mn/v1'
+    var sdk = new byteSdk.ByteSdk({
+        appId: 91, // application id
+        key:{
+            private: keys.private, 
+            public: keys.key,
+            passphrase: keys.passphrase,
+        },
+        appBaseUri: 'http://app.test.byte.mn/v1',
+        userBaseUri: 'http://userly.test.byte.mn/v1'
     });
-    console.log("jct=", app.genJCT());
+    console.log("jct=", sdk.genJCT());
     
-    app.getJAT(function (err, jat) {
-            console.log("jat=", jat);        
-    });    
+    sdk.getJAT().then( ... );    
+    
     
 ```
