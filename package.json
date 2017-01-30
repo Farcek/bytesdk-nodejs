@@ -1,16 +1,23 @@
 {
-  "name": "byte-sdk",
-  "version": "1.0.0",
-  "description": "byte system sdk",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Farcek <farcek@gmail.com>",
-  "license": "ISC",
-  "repository": "https://github.com/Farcek/bytesdk-nodejs.git",
-  "dependencies": {
-    "jsonwebtoken": "^5.7.0",
-    "request": "^2.72.0"
-  }
+    "name": "byte-sdk",
+    "version": "2.0.0",
+    "description": "byte system sdk",
+    "main": "lib/sdk.js",
+    "typeings": "lib/sdk.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Farcek <farcek@gmail.com>",
+    "license": "ISC",
+    "repository": "https://github.com/Farcek/bytesdk-nodejs.git",
+    "dependencies": {
+        "jsonwebtoken": "^5.7.0",
+        "request": "^2.72.0"
+    },
+    "devDependencies": {
+        "@types/bluebird": "^3.0.37",
+        "@types/jsonwebtoken": "^7.2.0",
+        "@types/node": "^7.0.4",
+        "@types/request": "0.0.39"
+    }
 }

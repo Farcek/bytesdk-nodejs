@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "target": "es5",
+        "lib": [
+            "es2015", "es5", "es6"
+        ],
+        "rootDir": "src",
+        "outDir": "lib"
+    },
+    "files": [
+        "src/sdk.ts"
+    ]
+}

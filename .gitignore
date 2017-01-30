@@ -2,3 +2,4 @@
 /.idea
 /test/keys
 .vscode/symbols.json
+.vscode/settings.json
