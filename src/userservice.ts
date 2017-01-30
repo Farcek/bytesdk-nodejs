@@ -38,7 +38,10 @@ export async function loginFb(params: ILoginFbParams) {
                 return reject(body.error || body.errors);
             }
 
-            resolve(body);
+            if (httpResponse.statusCode == 200) {
+                return resolve(body);
+            }
+            reject(body);
         });
     });
 }
@@ -89,7 +92,11 @@ export async function profile(params: IProfileParams) {
                 return reject(body.error || body.errors);
             }
 
-            resolve(body);
+            if (httpResponse.statusCode == 200) {
+                return resolve(body);
+            }
+            reject(body);
+
         });
     });
 }

@@ -4,10 +4,6 @@ import * as app from "./appservice";
 import * as user from "./userservice";
 
 export interface IByteSdkOptions {
-    /**
-     * base uri
-     */
-    uri: string
     appId: number
     key: {
         private: string

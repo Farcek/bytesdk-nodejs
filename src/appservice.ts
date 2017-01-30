@@ -41,7 +41,6 @@ export async function getJAT(baseUri: string, appId: number, jct: string) {
             if (err) {
                 return reject(err);
             }
-
             if (body.payload && body.payload.name === "jat" && body.jat) {
                 resolve(body);
             } else {
